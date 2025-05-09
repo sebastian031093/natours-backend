@@ -9,7 +9,11 @@ const app = express();
 
 //TODO: Middlewere: is a basically a function that can modify the incoming request data. "middle into request and response"
 app.use(express.json());
-app.use(morgan('dev'));
+
+if (process.env.NODE_ENV == 'development') app.use(morgan('dev'));
+
+//Serving statics files
+app.use(express.static(`${__dirname}/public`));
 
 app.use((req, resp, next) => {
   console.log('Hello from the middlewere.');
@@ -37,11 +41,6 @@ app.use((req, resp, next) => {
 // app.get('/api/v1/tours/:id', getTour);
 // app.patch('/api/v1/tours/:id', updatedTour);
 // app.delete('/api/v1/tours/:id', deletedTour);
-
-//3) ROUTE
-
-const userRouter = express.Router();
-const tourRouter = express.Router();
 
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
