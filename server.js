@@ -13,13 +13,14 @@ mongoose
     useCreateIndex: true,
     // useFindAndModify: false,
     useUnifiedTopology: true,
+    dbName: 'natorus',
   })
   .then(con => {
     // console.log(con.connections);
     // console.log('DB connection succefully.');
   });
 
-const testTour = new Tour({
+/* const testTour = new Tour({
   name: 'The Forrest Hiker',
   rating: 4.7,
   price: 654,
@@ -32,9 +33,9 @@ testTour
   })
   .catch(error => {
     console.log('error from', error);
-  });
+  }); */
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 app.listen(PORT, function () {
   console.log(`APP running on port ${PORT}`);
 });
