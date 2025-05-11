@@ -37,7 +37,18 @@ exports.checkBody = function (req, resp, next, val) {
 
 exports.getAllTours = async function (req, resp) {
   try {
-    const tours = await Tour.find();
+    // const tours = await Tour.find();
+
+    //TODO:build the query
+    const queryObj = { ...req.query }; //TODO:shallow copy from req.query object.
+    const excludeFields = ['page', 'sort', 'limit', 'fields'];
+
+    excludeFields.forEach(el => delete queryObj[el]);
+
+    const query = Tour.find(queryObj);
+
+    //TODO: execute query.
+    const tours = await query;
 
     resp.status(200).json({
       status: 'success',
